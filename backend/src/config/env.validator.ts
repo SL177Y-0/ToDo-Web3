@@ -46,7 +46,7 @@ export function validateEnvironment(configuration: Record<string, unknown>) {
   const errors = validateSync(finalConfig, { skipMissingProperties: false });
 
   if (errors.length > 0) {
-    throw new Error(errors.toString());
+    throw new Error(`Configuration validation error: ${errors.toString()}`);
   }
 
   return finalConfig;

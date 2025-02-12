@@ -1,20 +1,25 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.28;
+pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
-contract TodoList is Ownable(msg.sender), ReentrancyGuard {
+contract EnhancedTodoList is Ownable(msg.sender), ReentrancyGuard {
     struct Task {
         bytes32 id; // Unique ID for the task
         address owner; // Address of task creator
+        uint8 category;
+        uint8 priority;
+        uint256 deadline;
+        bytes32[] dependencies;
         bool isCompleted;
         uint256 createdAt;
         uint256 completedAt;
         bool isDeleted;
+        mapping(bytes32 => bool) metadata;
     }
 
-    mapping(bytes32 => Task) public tasks; // Store all tasks
+    mapping(bytes32 => Task) private tasks; // Store all tasks
     mapping(address => bytes32[]) public userTasks; // Store all task as per user
 
     // Event tracking for changes
@@ -46,12 +51,16 @@ contract TodoList is Ownable(msg.sender), ReentrancyGuard {
         _;
     }
 
-    function createTask(bytes32 _taskId) external nonReentrant {
+    function createTask(bytes32 _taskId, uint8 _category, uint8 _priority, uint256 _deadline, bytes32[] memory _dependencies) external nonReentrant {
         require(tasks[_taskId].owner == address(0), "Task already exists");
 
         Task memory newTask = Task({
             id: _taskId,
             owner: msg.sender,
+            category: _category,
+            priority: _priority,
+            deadline: _deadline,
+            dependencies: _dependencies,
             isCompleted: false,
             createdAt: block.timestamp,
             completedAt: 0,

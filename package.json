@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "nestjs": "^0.0.1",
+    "prisma": "^6.3.1"
+  }
+}

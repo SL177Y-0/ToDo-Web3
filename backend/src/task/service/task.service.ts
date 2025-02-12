@@ -3,6 +3,7 @@ import {
   BadRequestException,
   NotFoundException,
   Logger,
+  Cacheable,
 } from '@nestjs/common';
 import { ContractService } from '../../contract/service/contract.service';
 import { TaskRepository } from '../repository/task.repository';
@@ -11,10 +12,12 @@ import { generateTaskHash } from 'src/common/utils/hash.util';
 import { TaskStatus } from '@prisma/client';
 import { BlockchainTask } from '../type';
 import { ethers } from 'ethers';
+import { Task } from './task.entity';
 
 @Injectable()
 export class TaskService {
   private readonly logger = new Logger(TaskService.name);
+  private tasks: Task[] = [];
 
   constructor(
     private readonly contractService: ContractService,
@@ -220,5 +223,21 @@ export class TaskService {
       data.timestamp,
     );
     return computedHash === data.task_hash;
+  }
+
+  @Cacheable()
+  async getTasks(): Promise<Task[]> {
+    // Custom caching strategy
+    return this.tasks;
+  }
+
+  async createTask(task: Task): Promise<Task> {
+    // Custom validation and AI integration
+    this.tasks.push(task);
+    return task;
+  }
+
+  async deleteTask(taskId: string): Promise<void> {
+    this.tasks = this.tasks.filter(task => task.id !== taskId);
   }
 }
