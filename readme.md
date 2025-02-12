@@ -1,4 +1,4 @@
-# Web3 Project
+# Web3+AI Project
 
 ## Overview
 
@@ -13,7 +13,7 @@ Web3ToDo is a decentralized application (dApp) that utilizes the Ethereum blockc
 
 ## Introduction
 
-Welcome to the Project repository! This project aims to showcase the potential of decentralized applications by combining the power of Ethereum, React.js, and Node.js. The application allows users to create, view, update and delete tasks and many other features.
+Welcome to the Project repository! This project aims to showcase the potential of decentralized applications by combining the power of Ethereum, React.js, and Node.js. The application allows users to create, view, update and delete tasks and many other features like Priority,completion,suggestions.
 
 ## Installation
 
