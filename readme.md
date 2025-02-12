@@ -1,44 +1,46 @@
-# Web3+AI Project
+# Decentralized Task Management dApp
 
-## Overview
+A decentralized task management application that combines smart contracts with AI-powered prioritization.
 
-Web3ToDo is a decentralized application (dApp) that utilizes the Ethereum blockchain for transparency and security. It provides a user-friendly interface built with React.js for interacting with the blockchain, while the server side is powered by Node.js and Express.
+## Project Overview
 
-## Table of Contents
+This project consists of three main parts:
 
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Technologies Used](#technologies-used)
+- Smart Contract (`/contract`) - Task management logic on blockchain
+- Backend Server (`/backend`) - NestJS server with auth and AI
+- Frontend (`/frontend`) - React UI with wallet integration
 
-## Introduction
+## Quick Start
 
-Welcome to the Project repository! This project aims to showcase the potential of decentralized applications by combining the power of Ethereum, React.js, and Node.js. The application allows users to create, view, update and delete tasks and many other features like Priority,completion,suggestions.
+1. **Smart Contract**
 
-## Installation
+   - Deploy contract to Sepolia network
+   - Get contract address
 
-Follow the steps below to set up the Project on your local machine:
+2. **Backend Server**
 
-1. Clone the repository: `git clone <link-to-project>'
-2. Navigate to the project folder: `cd`
-3. Navigate to the api folder: `cd api`
-4. Install server dependencies: `npm install`
-5. Navigate to the `client` folder: `cd client`
-6. Install client dependencies: `npm install`
+   - Install dependencies and setup database
+   - Configure environment variables
+   - Start server
 
-## Usage
+3. **Frontend**
+   - Install dependencies
+   - Configure contract address and backend URL
+   - Start development server
 
-follow these instructions:
+## Main Features
 
-1. Start the server: `npm start`
-2. In a separate terminal, start the client: `npm run dev`
-3. The server will run on http://localhost:3000 and the client on http://localhost:5173
+- Create and manage tasks on blockchain
+- Wallet authentication (MetaMask)
+- AI-powered task prioritization
+- Task status verification on blockchain
 
-## Technologies Used
+## Tech Stack
 
-- Ethereum
-- React.js
-- Node.js
-- Express
-- Solidity
-- GeminiAIAPI
+- Smart Contract: Solidity, Hardhat
+- Backend: NestJS, Prisma, MySQL, Cohere AI
+- Frontend: React, TypeScript, Tailwind, ethers.js
+
+## Detailed Setup
+
+See individual README files in each directory for detailed setup instructions.
