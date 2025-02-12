@@ -41,3 +41,4 @@ follow these instructions:
 - Node.js
 - Express
 - Solidity
+- GeminiAIAPI
