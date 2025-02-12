@@ -1,4 +1,5 @@
-# ✅ Decentralized Task Management dApp  
+# NOTE - Follow The Readme Files Inside The Directory  
+# ✅ Decentralized Task Management dApp 
 
 The **Decentralized Task Management dApp** is a blockchain-powered application designed to manage tasks transparently and securely. It integrates **smart contracts** for immutable task management and leverages **AI** to optimize task prioritization.  
 
