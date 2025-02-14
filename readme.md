@@ -1,4 +1,4 @@
-# NOTE - Follow The Readme Files Inside The Directory  
+# NOTE - Follow The Readme Files Inside The Directory to run
 # ✅ Decentralized Task Management dApp 
 
 The **Decentralized Task Management dApp** is a blockchain-powered application designed to manage tasks transparently and securely. It integrates **smart contracts** for immutable task management and leverages **AI** to optimize task prioritization.  
@@ -20,58 +20,6 @@ This project consists of three core components:
 ### 🔹 **Frontend (`/frontend`)**  
 - Provides an intuitive **React-based UI** with **wallet authentication**.  
 - Integrates **MetaMask** for secure blockchain interaction.  
-
----
-
-## ⚡ Quick Start  
-
-### **1️⃣ Deploy Smart Contract**  
-```bash
-# Navigate to contract directory
-cd contract
-
-# Compile and deploy to Sepolia testnet
-npx hardhat run scripts/deploy.js --network sepolia
-```
-📌 **Retrieve the deployed contract address** and update your frontend/backend configuration.  
-
-### **2️⃣ Set Up Backend Server**  
-```bash
-cd backend
-npm install
-```
-
-#### Configure Environment Variables (`.env`):  
-```plaintext
-DATABASE_URL=mysql://username:password@localhost:3306/dbname
-CONTRACT_ADDRESS=your-deployed-contract-address
-AI_API_KEY=your-cohere-ai-key
-JWT_SECRET=your-secret-key
-```
-
-#### Start Backend Server  
-```bash
-npm run start
-```
-_(Runs on `http://localhost:5000`)_
-
-### **3️⃣ Set Up Frontend**  
-```bash
-cd frontend
-npm install
-```
-
-#### Configure `.env` for Frontend  
-```plaintext
-REACT_APP_CONTRACT_ADDRESS=your-deployed-contract-address
-REACT_APP_BACKEND_URL=http://localhost:5000
-```
-
-#### Start Development Server  
-```bash
-npm run dev
-```
-_(Runs on `http://localhost:5173`)_
 
 ---
 
@@ -110,7 +58,6 @@ To deploy this project, use:
 
 - **Frontend**: Vercel, Netlify  
 - **Backend**: Render, Heroku  
-- **Database**: Supabase, PlanetScale  
 - **Smart Contract**: Sepolia Testnet  
 
 Ensure that **environment variables** are properly configured before deployment.  
