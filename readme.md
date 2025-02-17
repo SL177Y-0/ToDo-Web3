@@ -60,7 +60,7 @@ This project consists of three core components:
 This project deployed on :
 
 - **Frontend**: Vercel 
-- **Backend**: Railway
+- **Backend**: Render
 - **Smart Contract**: Sepolia Testnet  
 
 Ensure that **environment variables** are properly configured before deployment.  
