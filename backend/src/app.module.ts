@@ -12,15 +12,14 @@ import { validateEnvironment } from './config/env.validator';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env',
-      load: [],
+      envFilePath: '.env', // Load environment variables
       isGlobal: true,
       validate: validateEnvironment,
     }),
     DatabaseModule,
     AuthModule,
     ContractModule,
-    TaskModule,
+    TaskModule, // Ensure TaskModule is included
     AISuggestionModule,
   ],
   controllers: [AppController],

@@ -1,16 +1,15 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  console.log("Starting todochain contract deployment....");
+  console.log("Starting EnhancedTodoList contract deployment....");
 
-  const todoListFactor = await ethers.getContractFactory("TodoList");
-  const todoList = await todoListFactor.deploy();
+  const todoListFactory = await ethers.getContractFactory("EnhancedTodoList");
+  const todoList = await todoListFactory.deploy();
 
   await todoList.waitForDeployment();
-
+  
   const deployedAddress = await todoList.getAddress();
-
-  console.log(`TodoList deployed to:${deployedAddress}`);
+  console.log(`EnhancedTodoList deployed to: ${deployedAddress}`);
 }
 
 main()

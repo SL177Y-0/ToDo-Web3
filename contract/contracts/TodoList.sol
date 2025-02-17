@@ -16,11 +16,13 @@ contract EnhancedTodoList is Ownable(msg.sender), ReentrancyGuard {
         uint256 createdAt;
         uint256 completedAt;
         bool isDeleted;
-        mapping(bytes32 => bool) metadata;
     }
 
     mapping(bytes32 => Task) private tasks; // Store all tasks
     mapping(address => bytes32[]) public userTasks; // Store all task as per user
+
+    // Separate mapping to handle metadata
+    mapping(bytes32 => mapping(bytes32 => bool)) private taskMetadata;
 
     // Event tracking for changes
     event TaskCreated(
@@ -141,5 +143,15 @@ contract EnhancedTodoList is Ownable(msg.sender), ReentrancyGuard {
         }
 
         return filteredTasks;
+    }
+
+    // Function to set metadata for a task
+    function setTaskMetadata(bytes32 _taskId, bytes32 _key, bool _value) external taskExists(_taskId) isTaskOwner(_taskId) {
+        taskMetadata[_taskId][_key] = _value;
+    }
+
+    // Function to get metadata for a task
+    function getTaskMetadata(bytes32 _taskId, bytes32 _key) external view taskExists(_taskId) returns (bool) {
+        return taskMetadata[_taskId][_key];
     }
 }

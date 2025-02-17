@@ -1,4 +1,4 @@
-# TaskChain Frontend
+# Frontend
 
 A React-based frontend for decentralized task management with blockchain integration and AI-powered task analysis.
 
@@ -36,7 +36,9 @@ npm install
 
 ```bash
 VITE_BACKEND_URL=http://localhost:3000
-VITE_CONTRACT_ADDRESS=your-contract-address
+VITE_CONTRACT_ADDRESS=your_contract_address
+VITE_API_URL=http://localhost:3000/api
+VITE_API_BACKEND_URL=http://localhost:3000/api
 ```
 
 4. Start developement server

@@ -22,9 +22,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ReentrancyGuard__factory>;
     getContractFactory(
-      name: "TodoList",
+      name: "EnhancedTodoList",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TodoList__factory>;
+    ): Promise<Contracts.EnhancedTodoList__factory>;
 
     getContractAt(
       name: "Ownable",
@@ -37,10 +37,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.ReentrancyGuard>;
     getContractAt(
-      name: "TodoList",
+      name: "EnhancedTodoList",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
-    ): Promise<Contracts.TodoList>;
+    ): Promise<Contracts.EnhancedTodoList>;
 
     deployContract(
       name: "Ownable",
@@ -51,9 +51,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ReentrancyGuard>;
     deployContract(
-      name: "TodoList",
+      name: "EnhancedTodoList",
       signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.TodoList>;
+    ): Promise<Contracts.EnhancedTodoList>;
 
     deployContract(
       name: "Ownable",
@@ -66,10 +66,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ReentrancyGuard>;
     deployContract(
-      name: "TodoList",
+      name: "EnhancedTodoList",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.TodoList>;
+    ): Promise<Contracts.EnhancedTodoList>;
 
     // default types
     getContractFactory(

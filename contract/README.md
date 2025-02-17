@@ -56,25 +56,6 @@ The main contract that handles task management:
 - Task Deletion: Soft delete functionality for tasks
 - Event Tracking: Events emitted for all major operations
 
-### Key Functions
-
-```solidity
-function createTask(bytes32 _taskId) external
-function completeTask(bytes32 _taskId) external
-function deleteTask(bytes32 _taskId) external
-function getFilteredTasks(...) external view returns (bytes32[] memory)
-```
-
-## Testing
-
-```bash
-# Run all tests
-npx hardhat test
-
-# Run specific test file
-npx hardhat test test/TodoList.test.ts
-```
-
 ## Deployment
 
 ```bash
@@ -95,15 +76,8 @@ npx hardhat verify --network sepolia DEPLOYED_CONTRACT_ADDRESS
 
 ## Security Measures
 
-- ReentrancyGuard implementation
+- ReentrancyGuard implementation (No More Spams)
 - Access control for task operations
 - Input validation
 - Gas optimization
 
-## License
-
-MIT
-
-## Contact
-
-[Your Contact Information]

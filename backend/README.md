@@ -1,12 +1,12 @@
-# Task Management Backend
+# Backend
 
-A NestJS backend service handling authentication, task management, and AI integration using Cohere for the decentralized task management application.
+A NestJS backend service handling authentication, task management, and AI integration using MistralAI7b for the decentralized task management application.
 
 ## Features
 
 - JWT-based authentication with wallet address verification
 - Task management with blockchain state synchronization
-- AI-powered task analysis using Cohere
+- AI-powered task analysis using MistralAI7b
 - MySQL database with Prisma ORM
 - Smart contract interaction using ethers.js
 
@@ -14,7 +14,7 @@ A NestJS backend service handling authentication, task management, and AI integr
 
 - Node.js v16 or later
 - MySQL database
-- Cohere API key
+- Hugging Face API key (MistralAI7b)
 - MetaMask wallet
 - Smart contract deployed on Sepolia testnet
 
@@ -37,8 +37,7 @@ npm install
 
 ```bash
 # Database
-DATABASE_URL="mysql://user:password@localhost:3306/taskchain"
-
+DATABASE_URL=your_database_url
 # JWT
 JWT_SECRET=your-jwt-secret
 
@@ -47,7 +46,13 @@ CONTRACT_ADDRESS=your-contract-address
 SEPOLIA_RPC_URL=your-sepolia-rpc-url
 
 # AI
-COHERE_API_KEY=your-cohere-api-key
+HUGGINGFACE_API_KEY=your-huggingface-api-key
+
+#PORT
+PORT=3000
+
+#FRONTEND
+FRONTEND_URL=http://localhost:5173
 ```
 
 4. Run database migrations
@@ -82,4 +87,4 @@ src/
 - Service layer for business logic
 - Controller layer for HTTP endpoints
 - Blockchain interaction via ethers.js
-- AI integration using Cohere
+- AI integration using MistralAI7b

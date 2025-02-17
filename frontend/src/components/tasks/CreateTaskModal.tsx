@@ -27,11 +27,19 @@ export const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     e.preventDefault();
     setIsLoading(true);
 
+    if (!formData.title.trim() || formData.priority < 0 || formData.priority > 5) {
+      toast.error("Invalid input: Title is required & priority must be between 0-5.");
+      setIsLoading(false);
+      return;
+    }
+
     try {
-      const waitingToastId = toast.loading(
-        "Please confirm the transaction in your wallet"
-      );
+      const waitingToastId = toast.loading("Fetching timestamp...");
+
       const { timestamp } = await taskService.getTimestamp();
+      if (!timestamp) throw new Error("Failed to retrieve timestamp.");
+
+      if (!address) throw new Error("Wallet address not found. Please connect your wallet.");
 
       const taskHash = ethers.keccak256(
         ethers.AbiCoder.defaultAbiCoder().encode(
@@ -42,54 +50,33 @@ export const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const contract = new ethers.Contract(
-        CONTRACT_CONFIG.address,
-        CONTRACT_CONFIG.abi,
-        signer
-      );
-
-      const tx = await contract.createTask(taskHash);
+      const contract = new ethers.Contract(CONTRACT_CONFIG.address, CONTRACT_CONFIG.abi, signer);
 
       toast.update(waitingToastId, {
-        render: "Transaction submitted! Waiting for confirmation...",
+        render: "Confirm transaction in wallet...",
         type: "info",
         isLoading: true,
       });
 
+      const tx = await contract.createTask(taskHash);
       await tx.wait();
 
       await taskService.createTask({
         title: formData.title,
-        priority: Number(formData.priority),
+        priority: formData.priority,
         due_date: formData.dueDate ? new Date(formData.dueDate) : undefined,
         task_hash: taskHash,
-        user_address: address || "",
+        user_address: address,
         timestamp,
       });
 
       toast.dismiss(waitingToastId);
-      toast.success("Task completed successfully!");
+      toast.success("Task created successfully!");
       onSuccess();
       onClose();
     } catch (error: any) {
-      console.error("Error details:", error);
-
-      // More specific error handling
-      if (error.code === "ACTION_REJECTED") {
-        toast.error("Transaction was rejected. Please try again.");
-      } else if (error.code === "INSUFFICIENT_FUNDS") {
-        toast.error("Insufficient funds to complete transaction.");
-      } else if (error.code === "UNPREDICTABLE_GAS_LIMIT") {
-        toast.error("Error estimating gas. Please try again.");
-      } else if (error.code === "CALL_EXCEPTION") {
-        toast.error("Contract call failed. The task might already exist.");
-      } else {
-        toast.error(
-          error.reason ||
-            error.message ||
-            "Failed to create task. Please try again."
-        );
-      }
+      toast.dismiss();
+      toast.error(error.reason || error.message || "Task creation failed.");
     } finally {
       setIsLoading(false);
     }
@@ -101,58 +88,35 @@ export const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
         <h2 className="text-2xl font-bold mb-4">Create New Task</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Title
-            </label>
-            <input
-              type="text"
-              value={formData.title}
-              onChange={(e) =>
-                setFormData({ ...formData, title: e.target.value })
-              }
-              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              required
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="Task Title"
+            value={formData.title}
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2"
+            required
+          />
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Priority (0-5)
-            </label>
-            <input
-              type="number"
-              min="0"
-              max="5"
-              value={formData.priority}
-              onChange={(e) =>
-                setFormData({ ...formData, priority: Number(e.target.value) })
-              }
-              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
+          <input
+            type="number"
+            min="0"
+            max="5"
+            value={formData.priority}
+            onChange={(e) =>
+              setFormData({ ...formData, priority: Math.max(0, Math.min(5, Number(e.target.value))) })
+            }
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2"
+          />
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Due Date
-            </label>
-            <input
-              type="date"
-              value={formData.dueDate}
-              onChange={(e) =>
-                setFormData({ ...formData, dueDate: e.target.value })
-              }
-              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
+          <input
+            type="date"
+            value={formData.dueDate}
+            onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2"
+          />
 
           <div className="flex space-x-3 pt-4">
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={onClose}
-              className="flex-1"
-            >
+            <Button type="button" variant="secondary" onClick={onClose} className="flex-1">
               Cancel
             </Button>
             <Button type="submit" className="flex-1" isLoading={isLoading}>

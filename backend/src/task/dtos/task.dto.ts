@@ -32,6 +32,9 @@ export class CreateTaskDto {
   @IsOptional()
   @IsDate()
   due_date?: Date;
+
+  @IsString()
+  user_id: string;
 }
 
 export class VerifyTaskDto {

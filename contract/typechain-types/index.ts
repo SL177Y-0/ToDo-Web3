@@ -10,5 +10,5 @@ export type { Ownable } from "./@openzeppelin/contracts/access/Ownable";
 export { Ownable__factory } from "./factories/@openzeppelin/contracts/access/Ownable__factory";
 export type { ReentrancyGuard } from "./@openzeppelin/contracts/utils/ReentrancyGuard";
 export { ReentrancyGuard__factory } from "./factories/@openzeppelin/contracts/utils/ReentrancyGuard__factory";
-export type { TodoList } from "./contracts/TodoList";
-export { TodoList__factory } from "./factories/contracts/TodoList__factory";
+export type { EnhancedTodoList } from "./contracts/TodoList.sol/EnhancedTodoList";
+export { EnhancedTodoList__factory } from "./factories/contracts/TodoList.sol/EnhancedTodoList__factory";

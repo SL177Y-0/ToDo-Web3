@@ -67,6 +67,12 @@ export class ContractService implements OnModuleInit {
     }
   }
 
+  isValidHash(hash: string): boolean {
+    // Implement your hash validation logic here
+    // For example, check if the hash matches a certain pattern or criteria
+    return ethers.isHexString(hash) && hash.length === 66; // Example validation
+  }
+
   getContractConfig() {
     return {
       address: CONTRACT_CONFIG.address,

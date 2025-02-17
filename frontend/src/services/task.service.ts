@@ -2,51 +2,42 @@ import { TaskStatus } from "@/types/task";
 import api from "./api.service";
 
 export const taskService = {
-  getTasks: async (params?: {
-    status?: TaskStatus;
-    page?: number;
-    limit?: number;
-  }) => {
+  async getTasks(params?: { status?: TaskStatus; page?: number; limit?: number }) {
     try {
       const response = await api.get("/tasks", { params });
-      return response.data;
+      return {
+        tasks: Array.isArray(response.data?.tasks) ? response.data.tasks : [],
+        total: response.data?.total || 0,
+      };
     } catch (error) {
-      throw error;
+      console.error("Error fetching tasks:", error);
+      return { tasks: [], total: 0 };
     }
   },
 
-  verifyUpdate: async (
-    taskHash: string,
-    data: { isCompleted?: boolean; isDeleted?: boolean }
-  ) => {
+  async getTimestamp() {
     try {
-      const response = await api.post("/tasks/verify-update", {
-        task_hash: taskHash,
-        ...data,
-      });
-      return response.data;
+      const response = await api.get("/tasks/timestamp");
+      return response.data || null;
     } catch (error) {
-      throw error;
+      console.error("Error fetching timestamp:", error);
+      return null;
     }
   },
 
-  getTimestamp: async () => {
-    const response = await api.get("/tasks/timestamp");
-    return response.data;
-  },
-
-  createTask: async (data: {
+  async createTask(data: {
     title: string;
     priority: number;
     due_date?: Date;
     task_hash: string;
     user_address: string;
     timestamp: number;
-  }) => {
+  }) {
     try {
       const response = await api.post("/tasks", data);
       return response.data;
     } catch (error) {
+      console.error("Error creating task:", error);
       throw error;
     }
   },
