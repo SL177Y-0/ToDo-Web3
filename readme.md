@@ -62,6 +62,7 @@ This project deployed on :
 - **Frontend**: Vercel 
 - **Backend**: Render
 - **Smart Contract**: Sepolia Testnet  
+- **DataBase**: Railway
 
 Ensure that **environment variables** are properly configured before deployment.  
 
