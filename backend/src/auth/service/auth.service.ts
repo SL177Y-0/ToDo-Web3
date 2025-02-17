@@ -12,39 +12,25 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  /**
-   * Register a new user
-   * @param dto - Registration data including email, password, and wallet address
-   * @throws UnauthorizedException if email or wallet already exists
-   * @returns Authentication response with tokens and user info
-   */
-  async register(
-    registrationDetails: RegisterDtoInterface,
-  ): Promise<IAuthResponse> {
+  async register(registrationDetails: RegisterDtoInterface): Promise<IAuthResponse> {
     if (registrationDetails.password !== registrationDetails.confirmPassword) {
       throw new UnauthorizedException('Passwords do not match');
     }
 
-    const { password, ...registrationData } = registrationDetails;
-
-    const existingUser = await this.authRepository.findByEmail(
-      registrationData.email,
-    );
+    const existingUser = await this.authRepository.findByEmail(registrationDetails.email);
     if (existingUser) {
       throw new UnauthorizedException('Email already registered');
     }
 
-    const existingWallet = await this.authRepository.findByWallet(
-      registrationData.walletAddress,
-    );
+    const existingWallet = await this.authRepository.findByWallet(registrationDetails.walletAddress);
     if (existingWallet) {
       throw new UnauthorizedException('Wallet address already registered');
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(registrationDetails.password, 10);
 
     const user = await this.authRepository.create({
-      ...registrationData,
+      ...registrationDetails,
       password: hashedPassword,
     });
 
@@ -64,24 +50,15 @@ export class AuthService {
     };
   }
 
-  /**
-   * Authenticate user login
-   * @param dto - Login credentials (email and password)
-   * @throws UnauthorizedException if credentials are invalid
-   * @returns Authentication response with tokens and user info
-   */
   async login(data: LoginDto): Promise<IAuthResponse> {
     const user = await this.authRepository.findByEmail(data.email);
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const existingWallet = await this.authRepository.findByWalletAndEmail(
-      data.wallet_address,
-      data.email,
-    );
+    const existingWallet = await this.authRepository.findByWalletAndEmail(data.wallet_address, data.email);
     if (!existingWallet) {
-      throw new UnauthorizedException('Wallet address is missed match');
+      throw new UnauthorizedException('Wallet address mismatch');
     }
 
     const isPasswordValid = await bcrypt.compare(data.password, user.password);
@@ -105,11 +82,6 @@ export class AuthService {
     };
   }
 
-  /**
-   * Generate JWT access and refresh tokens
-   * @param user - User's ID
-   * @returns Object containing access and refresh tokens
-   */
   private async generateTokens(user: UserDetails) {
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(
@@ -133,11 +105,6 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
-  /**
-   * Validate user for JWT strategy
-   * @param userId - User's ID
-   * @returns User if found, null otherwise
-   */
   async validateUser(userId: string) {
     return this.authRepository.findById(userId);
   }

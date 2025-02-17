@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common'; 
 import { AuthService } from '../service/auth.service';
 import { RegisterDto } from '../dtos/registeration.dto';
 import { LoginDto } from '../dtos/login.dto';
@@ -8,13 +8,8 @@ import { IAuthResponse } from '../types';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  /**
-   * Register a new user
-   * @param dto - Registration data including email, password, and wallet address
-   * @returns Authentication response containing tokens and user info
-   */
   @Post('register')
-  register(@Body() registrationDetails: RegisterDto): Promise<IAuthResponse> {
+  async register(@Body() registrationDetails: RegisterDto): Promise<IAuthResponse> {
     return this.authService.register({
       ...registrationDetails,
       firstName: registrationDetails.first_name,
@@ -24,13 +19,8 @@ export class AuthController {
     });
   }
 
-  /**
-   * Authenticate user login
-   * @param dto - Login credentials (email and password)
-   * @returns Authentication response containing tokens and user info
-   */
   @Post('login')
-  login(@Body() data: LoginDto): Promise<IAuthResponse> {
+  async login(@Body() data: LoginDto): Promise<IAuthResponse> {
     return this.authService.login(data);
   }
 }
