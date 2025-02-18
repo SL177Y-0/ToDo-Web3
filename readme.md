@@ -30,7 +30,7 @@ This project consists of three core components:
 
 ✔ **Decentralized Task Management** – Tasks are stored and managed via blockchain smart contracts.  
 ✔ **Secure Wallet Authentication** – Users log in using **MetaMask** for a seamless Web3 experience.  
-✔ **AI-Powered Task Prioritization** – **MistralAI7b** analyzes tasks and suggests optimal prioritization.  
+✔ **AI-Powered Task Prioritization** – **FlanT5Large** analyzes tasks and suggests optimal prioritization.  
 ✔ **On-Chain Task Verification** – Status updates are recorded immutably on the blockchain.  
 
 ---
@@ -45,7 +45,7 @@ This project consists of three core components:
 🛠 **NestJS** – Scalable and modular backend framework  
 🛠 **Prisma** – Database ORM for managing tasks  
 🛠 **MySQL** – Relational database for backend storage  
-🛠 **MistralAI7b** – AI model for intelligent task ranking  
+🛠 **FlanT5Large** – AI model for intelligent task ranking  
 
 ### **Frontend**  
 🛠 **React.js** – Interactive user interface  
