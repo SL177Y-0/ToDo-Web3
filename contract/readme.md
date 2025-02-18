@@ -15,7 +15,6 @@ A decentralized todo list smart contract that allows users to manage their tasks
 - Task creation with unique hash
 - Task completion verification
 - Task status tracking
-- Event emissions for task operations
 - Access control for task management
 - Gas-optimized operations
 
@@ -54,7 +53,6 @@ The main contract that handles task management:
 - Task Creation: Users can create tasks with unique identifiers
 - Task Completion: Tasks can be marked as completed with blockchain verification
 - Task Deletion: Soft delete functionality for tasks
-- Event Tracking: Events emitted for all major operations
 
 ## Deployment
 
