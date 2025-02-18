@@ -1,12 +1,12 @@
 # Backend
 
-A NestJS backend service handling authentication, task management, and AI integration using MistralAI7b for the decentralized task management application.
+A NestJS backend service handling authentication, task management, and AI integration using Google's Flan T5 Large Model for the decentralized task management application.
 
 ## Features
 
 - JWT-based authentication with wallet address verification
 - Task management with blockchain state synchronization
-- AI-powered task analysis using MistralAI7b
+- AI-powered task analysis using Flan T5 Large Model
 - MySQL database with Prisma ORM
 - Smart contract interaction using ethers.js
 
@@ -14,7 +14,7 @@ A NestJS backend service handling authentication, task management, and AI integr
 
 - Node.js v16 or later
 - MySQL database
-- Hugging Face API key (MistralAI7b)
+- Hugging Face API key (FlanT5Large)
 - MetaMask wallet
 - Smart contract deployed on Sepolia testnet
 
