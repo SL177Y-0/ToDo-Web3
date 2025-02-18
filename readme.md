@@ -18,7 +18,7 @@ This project consists of three core components:
 
 ### 🔹 **Backend Server (`/backend`)**  
 - Built with **NestJS** for handling authentication and API interactions.  
-- Uses **MistralAI7b AI** for intelligent task prioritization.  
+- Uses **FlanT5Large AI** for intelligent task prioritization.  
 
 ### 🔹 **Frontend (`/frontend`)**  
 - Provides an intuitive **React-based UI** with **wallet authentication**.  
