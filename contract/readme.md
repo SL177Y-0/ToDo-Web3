@@ -4,7 +4,7 @@ A decentralized todo list smart contract that allows users to manage their tasks
 
 ## Tech Stack
 
-- Solidity ^0.8.19
+- Solidity ^0.8.20
 - Hardhat
 - TypeScript
 - Ethers.js
