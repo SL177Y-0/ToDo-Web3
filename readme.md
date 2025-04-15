@@ -2,6 +2,12 @@
 
 LIVE - https://decentralized-to-do-application-with-ai-agent-integration.vercel.app/
 
+
+
+https://github.com/user-attachments/assets/887a5d93-0984-4cb5-8ea3-51234824c3db
+
+
+
 # ✅ Decentralized Task Management dApp 
 
 The **Decentralized Task Management dApp** is a blockchain-powered application designed to manage tasks transparently and securely. It integrates **smart contracts** for immutable task management and leverages **AI** to optimize task prioritization.  
